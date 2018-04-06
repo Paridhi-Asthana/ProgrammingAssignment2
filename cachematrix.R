@@ -1,15 +1,34 @@
-## Put comments here that give an overall description of what your
-## functions do
+## The code is meant to get inverse of an invertible matrix
 
-## Write a short comment describing this function
+## First function creates the base for getting inverse by creating a list of functions: set,get,setmean and getmean
 
 makeCacheMatrix <- function(x = matrix()) {
-
+        I<-NULL
+        set <-function(x) {
+                x<<-y
+                I<<-NULL
+        }
+        get <-function() {
+                x
+        }
+        setinverse <- function(inverse) {
+                I<<-inverse
+        }
+        getinverse <- function() {
+                I
+        }
+        list(set=set, get=get, setinverse=setinverse, getinverse=getinverse)
 }
 
-
-## Write a short comment describing this function
+## second function gets the inverse
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+        I=x$getinverse()
+        if(!is.null(I)) {
+                message("Getting inverse")
+                return(I)
+        }
+        x=x$get()
+        I<-solve(x)
+        return(I)
 }
